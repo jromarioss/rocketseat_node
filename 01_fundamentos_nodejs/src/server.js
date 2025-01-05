@@ -12,9 +12,11 @@ const server = http.createServer((req, res) => {
   }
 
   if (method === 'POST' && url === '/users') {
-    users.push({ id: 1, name: 'José', email: "jose@email.com" })
-    return res.end("Crando usuário!")
+    users.push({ id: 1, name: 'José', email: "jose@email.com" });
+    return res.writeHead(201).end()
   }
+
+  return res.writeHead(404).end();
 });
 
 server.listen(3333);
