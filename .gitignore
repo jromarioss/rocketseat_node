@@ -1,3 +1,6 @@
+# Database
+temp/app.db
+
 # Dependências do Node.js
 node_modules/
 package-lock.json
