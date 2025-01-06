@@ -1,5 +1,5 @@
 # Database
-temp/app.db
+db/app.db
 
 # Dependências do Node.js
 node_modules/
@@ -46,3 +46,5 @@ Thumbs.db
 
 # Outros
 !.github
+~$_api_rest_node.docx
+~WRL2785.tmp
