@@ -18,6 +18,7 @@ temp/
 
 # Ambiente de desenvolvimento
 .env
+.env.test
 .env.local
 .env.*.local
 
