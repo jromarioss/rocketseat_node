@@ -1,8 +1,8 @@
 import { Prisma, Gym } from "@prisma/client";
 
 export interface IFetchNearbyParams {
-  userLatitude: number;
-  userLongitude: number;
+  latitude: number;
+  longitude: number;
 }
 
 export interface GymsRepository {
