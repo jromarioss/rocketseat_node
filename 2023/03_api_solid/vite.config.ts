@@ -1,12 +1,15 @@
 import { defineConfig } from "vitest/config";
 
-export default defineConfig(async () => {
+const setupConfig = async () => {
   const tsconfigPaths = (await import("vite-tsconfig-paths")).default;
 
-  return {
+  return defineConfig({
     plugins: [tsconfigPaths()],
     test: {
       environment: "node",
+      environmentMatchGlobs: [["src/http/controllers/**", "prisma"]],
     },
-  };
-});
+  });
+};
+
+export default setupConfig();
