@@ -1,25 +1,30 @@
 import request from "supertest";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { app } from "@/app";
+import { createAndAuthenticateUser } from "@/utils/test/create-and-authenticate-user";
 
-describe("Register (e2e)", () => {
+describe("Profile (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
-  })
+  });
 
   afterAll(async () => {
     await app.close();
-  })
+  });
 
-  it("should be able to register", async () => {
-    const response = await request(app.server)
-      .post("/users")
-      .send({
-        name: "Jose",
-        email: "jose@email.com",
-        password: "123456"
-      });
+  it("should be able to get user profile", async () => {
+    const { token } = await createAndAuthenticateUser(app);
 
-    expect(response.statusCode).toEqual(201);
+    const profileResponse = await request(app.server)
+      .get("/me")
+      .set("Authorization", `Bearer ${token}`)
+      .send();
+
+    expect(profileResponse.statusCode).toEqual(200);
+    expect(profileResponse.body.user).toEqual(
+      expect.objectContaining({
+        email: "johndoe@email.com",
+      })
+    );
   });
 });
