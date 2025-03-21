@@ -8,6 +8,5 @@ export async function usersRoutes(app: FastifyInstance) {
 
   app.patch('/token/refresh', R.refresh);
 
-  /* Authenticated */
   app.get('/me', { onRequest: [verifyJWT] }, R.profile);
 }

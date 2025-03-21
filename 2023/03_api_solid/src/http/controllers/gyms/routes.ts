@@ -9,5 +9,5 @@ export async function gymsRoutes(app: FastifyInstance) {
   app.get('/gyms/search', G.search);
   app.get('/gyms/nearby', G.nearby);
 
-  app.post('/gyms', { onRequest: [verifyUserRole('ADMIN')] }, G.create);
+  app.post('/gyms', { onRequest: [verifyUserRole("ADMIN")] }, G.create);
 }
