@@ -10,9 +10,9 @@ const fakeAnswersRepository: AnswersRepository = {
 };
 
 test("create an answer", async () => {
-  const ansQuestion = new AnswerQuestionUseCase(fakeAnswersRepository);
+  const answerQuestion = new AnswerQuestionUseCase(fakeAnswersRepository);
 
-  const answer = await ansQuestion.execute({
+  const answer = await answerQuestion.execute({
     instructorId: "1",
     questionId: "1",
     content: "Nova resposta"

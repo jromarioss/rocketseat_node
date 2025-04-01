@@ -10,7 +10,7 @@ interface QuestionProps {
   title: string;
   content: string;
   slug: Slug;
-  attachments: any;
+  //attachments: any;
   createdAt: Date;
   updatedAt?: Date;
 }
@@ -36,9 +36,9 @@ export class Question extends Entity<QuestionProps> {
     return this.props.slug;
   }
 
-  get attachments() {
-    return this.props.attachments;
-  }
+  // get attachments() {
+  //   return this.props.attachments;
+  // }
 
   get createdAt() {
     return this.props.createdAt;
