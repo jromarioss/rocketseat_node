@@ -1,4 +1,4 @@
-import { expect } from "vitest";
+import { expect, describe, it, beforeEach } from "vitest";
 import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-repository";
 import { AnswerQuestionUseCase } from "./answer-question";
 

@@ -1,4 +1,4 @@
-import { expect } from "vitest";
+import { expect, describe, it, beforeEach } from "vitest";
 import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questions-repository";
 import { GetQuestionBySlugUseCase } from "./get-question-by-slug";
 import { makeQuestion } from "test/factories/make-question";
@@ -15,7 +15,7 @@ describe("Get question by slug", () => {
   it("should be able to get a question by slug", async () => { 
     const newQuestion = makeQuestion();
 
-    inMemoryQuestionsRepository.create(newQuestion);
+    await inMemoryQuestionsRepository.create(newQuestion);
 
     const { question } = await sut.execute({
       slug: "example-question"

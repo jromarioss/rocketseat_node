@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Design dirigido à domínio",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
@@ -16,6 +17,7 @@
     "@faker-js/faker": "^9.6.0",
     "@types/node": "^22.13.13",
     "typescript": "^5.8.2",
+    "vite": "^6.2.4",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.9"
   },
