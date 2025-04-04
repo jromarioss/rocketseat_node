@@ -2,9 +2,9 @@ import { Entity } from "@/core/entities/entity";
 import { UniqueEntityId } from "@/core/entities/unique-entity-id";
 import { Optional } from "@/core/types/optional";
 
-interface AnswerProps {
+export interface AnswerProps {
   authorId: UniqueEntityId;
-  questionid: UniqueEntityId;
+  questionId: UniqueEntityId;
   //attachments: any;
   content: string;
   createdAt: Date;
@@ -16,8 +16,8 @@ export class Answer extends Entity<AnswerProps> {
     return this.props.authorId;
   }
 
-  get questionid() {
-    return this.props.questionid;
+  get questionId() {
+    return this.props.questionId;
   }
 
   get content() {
