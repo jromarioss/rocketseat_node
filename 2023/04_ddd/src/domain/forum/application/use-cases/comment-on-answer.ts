@@ -11,7 +11,7 @@ interface CommentOnAnswerUseCaseRequest {
 }
 
 interface CommentOnAnswerUseCaseResponse {
-  
+  answerComment: AnswerComment;
 }
 
 export class CommentOnAnswerUseCase {

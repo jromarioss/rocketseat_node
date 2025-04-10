@@ -12,9 +12,7 @@ export class InMemoryQuestionCommentsRepository implements QuestionCommentsRepos
 
   async findById(id: string) {
     const question = this.items.find(item => item.id.toString() === id);
-
     if(!question) return null;
-
     return question;
   }
 
