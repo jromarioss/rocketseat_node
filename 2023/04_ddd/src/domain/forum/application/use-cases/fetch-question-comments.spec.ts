@@ -13,15 +13,9 @@ describe("Fetch Question Comments", () => {
   });
 
   it("should be able to fetch questions comments", async () => {
-    await inMemoryQuestionCommentsRepository.create(makeQuestionComment({
-      questionId: new UniqueEntityId("question-1")
-    }));
-    await inMemoryQuestionCommentsRepository.create(makeQuestionComment({
-      questionId: new UniqueEntityId("question-1")
-    }));
-    await inMemoryQuestionCommentsRepository.create(makeQuestionComment({
-      questionId: new UniqueEntityId("question-1")
-    }));
+    await inMemoryQuestionCommentsRepository.create(makeQuestionComment({ questionId: new UniqueEntityId("question-1") }));
+    await inMemoryQuestionCommentsRepository.create(makeQuestionComment({ questionId: new UniqueEntityId("question-1") }));
+    await inMemoryQuestionCommentsRepository.create(makeQuestionComment({ questionId: new UniqueEntityId("question-1") }));
 
     const { questionComments } = await sut.execute({
       questionId: "question-1",
