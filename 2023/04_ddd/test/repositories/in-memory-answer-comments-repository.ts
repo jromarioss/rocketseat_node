@@ -9,18 +9,18 @@ export class InMemoryAnswerCommentsRepository implements AnswerCommentsRepositor
     this.items.push(answerComment);
   }
 
-  async findById(id: string) {
-    const answerComment = this.items.find(item => item.id.toString() === id);
-    if(!answerComment) return null;
-    return answerComment;
-  }
-
   async findManyByAnswerId(answerId: string, { page }: PaginationParams) {
     const answerComments = this.items
       .filter(item => item.answerId.toString() === answerId)
       .slice((page - 1) * 20, page * 20);
 
     return answerComments;
+  }
+
+  async findById(id: string) {
+    const answerComment = this.items.find(item => item.id.toString() === id);
+    if(!answerComment) return null;
+    return answerComment;
   }
 
   async delete(answerComment: AnswerComment) {
