@@ -28,14 +28,17 @@ describe("Delete Answer", () => {
 
   it("should not be able to delete a answer from another user", async () => { 
     const newAnswer = makeAnswer({
-      authorId: new UniqueEntityId("author-1")
-    }, new UniqueEntityId("answer-1"));
+      authorId: new UniqueEntityId("author-2")
+    }, new UniqueEntityId("answer-2"))
 
-    await inMemoryAnswersRepository.create(newAnswer);
+    await inMemoryAnswersRepository.create(newAnswer)
 
-    const result = await sut.execute({ authorId: "author-2", answerId: "answer-1" });
+    const result = await sut.execute({
+      authorId: "author-3",
+      answerId: "answer-2"
+    })
 
-    expect(result.isLeft()).toBe(true);
-    expect(result.value).toBeInstanceOf(NotAllowedError);
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedError)
   });
 });
