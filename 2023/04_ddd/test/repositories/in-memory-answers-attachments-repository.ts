@@ -2,7 +2,7 @@ import { AnswerAttachmentsRepository } from "@/domain/forum/application/reposito
 import { AnswerAttachment } from "@/domain/forum/enterprise/entities/answer-attachment";
 
 export class InMemoryAnswerAttachmentsRepository implements AnswerAttachmentsRepository {
-  public items: AnswerAttachment[] = []
+  public items: AnswerAttachment[] = [];
 
   async findManyByAnswerId(answerId: string) {
     const answerAttachments = this.items.filter((item) => item.answerId.toString() === answerId);
@@ -10,7 +10,7 @@ export class InMemoryAnswerAttachmentsRepository implements AnswerAttachmentsRep
   }
 
   async deleteManyByAnswerId(answerId: string) {
-    const answerAttachments = this.items.filter((item) => item.answerId.toString() !== answerId)
+    const answerAttachments = this.items.filter((item) => item.answerId.toString() !== answerId);
     this.items = answerAttachments;
   }
 }
