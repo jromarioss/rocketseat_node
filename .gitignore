@@ -17,10 +17,10 @@ tmp/
 temp/
 
 # Ambiente de desenvolvimento
-.env
-.env.test
-.env.local
-.env.*.local
+#.env
+#.env.test
+#.env.local
+#.env.*.local
 
 # Builds
 dist/
@@ -49,3 +49,6 @@ Thumbs.db
 !.github
 ~$_api_rest_node.docx
 ~WRL2785.tmp
+
+#Docker
+data
