@@ -1,8 +1,10 @@
-import { UseGuards } from "@nestjs/common";
+import { Req, UseGuards } from "@nestjs/common";
 import { Body, Controller, HttpCode, Post } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { z } from "zod";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
+import { CurrentUser } from "src/auth/current-user-decorator";
+import { UserPayload } from "src/auth/jwt.strategy";
 
 const createQuestionBodySchema = z.object({
   name: z.string(),
@@ -19,8 +21,8 @@ export class CreateQuestionController {
 
   @Post()
   @HttpCode(201)
-  async handle(@Body() body: CreateQuestionBodySchema) {
+  async handle(@CurrentUser() user: UserPayload, @Body() body: CreateQuestionBodySchema) {
 
-    return { message: 'ok' };
+    return { message: user.sub };
   }
 }
