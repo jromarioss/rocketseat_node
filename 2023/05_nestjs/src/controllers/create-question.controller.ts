@@ -1,15 +1,15 @@
-import { Req, UseGuards } from "@nestjs/common";
+import { Req, UseGuards, UsePipes } from "@nestjs/common";
 import { Body, Controller, HttpCode, Post } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { z } from "zod";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { CurrentUser } from "src/auth/current-user-decorator";
 import { UserPayload } from "src/auth/jwt.strategy";
+import { ZodValidationPipe } from "src/pipe/zod-validation-pipe";
 
 const createQuestionBodySchema = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  password: z.string()
+  title: z.string(),
+  content: z.string(),
 });
 
 type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>;
@@ -21,8 +21,31 @@ export class CreateQuestionController {
 
   @Post()
   @HttpCode(201)
+    @UsePipes(new ZodValidationPipe(createQuestionBodySchema))
   async handle(@CurrentUser() user: UserPayload, @Body() body: CreateQuestionBodySchema) {
+    const { content, title } = body;
+    const { sub: userId } = user;
 
-    return { message: user.sub };
+    const slug = this.convertToSlug(title);
+
+    await this.prisma.question.create({
+      data: {
+        content,
+        title,
+        slug: slug,
+        authorId: userId
+      }
+    });
+
+    return { message: "Successful question" };
+  }
+
+  private convertToSlug(title: string) {
+    return title
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "-")
   }
 }
