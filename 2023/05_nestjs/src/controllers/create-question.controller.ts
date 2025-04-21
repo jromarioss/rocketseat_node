@@ -21,9 +21,9 @@ export class CreateQuestionController {
 
   @Post()
   @HttpCode(201)
-  @UsePipes(new ZodValidationPipe(createQuestionBodySchema))
-  async handle(@CurrentUser() user: UserPayload, @Body() body: CreateQuestionBodySchema) {
+  async handle(@CurrentUser() user: UserPayload, @Body(new ZodValidationPipe(createQuestionBodySchema)) body: CreateQuestionBodySchema) {
     const { content, title } = body;
+    console.log(content, title)
     const { sub: userId } = user;
 
     const slug = this.convertToSlug(title);
