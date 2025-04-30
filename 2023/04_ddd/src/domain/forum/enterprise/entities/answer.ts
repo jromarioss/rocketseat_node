@@ -38,7 +38,7 @@ export class Answer extends AggregateRoot<AnswerProps> {
     return this.props.updatedAt;
   }
 
-  get exerpt() {
+  get excerpt() {
     return this.content.substring(0, 120).trimEnd().concat("...");
   }
 
