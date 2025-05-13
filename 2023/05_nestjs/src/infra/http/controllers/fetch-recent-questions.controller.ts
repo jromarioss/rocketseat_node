@@ -1,9 +1,10 @@
-import { Get, Query, UseGuards } from "@nestjs/common";
+import { BadRequestException, Get, Query, UseGuards } from "@nestjs/common";
 import { Controller } from "@nestjs/common";
 import { JwtAuthGuard } from "@/infra/auth/jwt-auth.guard";
 import { ZodValidationPipe } from "@/infra/http/pipe/zod-validation-pipe";
 import { z } from "zod";
 import { FetchRecentQuestionsUseCase } from "@/domain/forum/application/use-cases/fetch-recent-question";
+import { QuestionPresenter } from "../presenters/question-presenter";
 
 const pageQueryParamSchema = z.string().optional().default('1').transform(Number).pipe(z.number().min(1));
 
@@ -18,8 +19,12 @@ export class FetchRecentQuestionsController {
 
   @Get()
   async handle(@Query('page', queryValidationPipe) page: PageQueryParamSchema) {
-    const questions = await this.fetchRecentQuestions.execute({ page });
+    const result = await this.fetchRecentQuestions.execute({ page });
+  
+    if (result.isLeft()) throw new BadRequestException();
 
-    return { questions };
+    const questions = result.value.questions;
+
+    return { questions: questions.map(QuestionPresenter.toHTTP) };
   }
 }
