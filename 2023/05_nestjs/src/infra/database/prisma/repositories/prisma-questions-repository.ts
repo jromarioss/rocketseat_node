@@ -4,15 +4,10 @@ import { Question } from "@/domain/forum/enterprise/entities/question";
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma.service";
 import { PrismaQuestionMapper } from "../mappers/prisma-question-mapper";
-import { DomainEvents } from "@/core/events/domain-events";
-import { QuestionAttachmentsRepository } from "@/domain/forum/application/repositories/question-attachments-repository";
 
 @Injectable()
 export class PrismaQuestionsRepository implements QuestionsRepository {
-  constructor(
-    private prisma: PrismaService,
-    private questionAttachmentsRepository: QuestionAttachmentsRepository,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async findById(id: string): Promise<Question | null> {
     const question = await this.prisma.question.findUnique({
